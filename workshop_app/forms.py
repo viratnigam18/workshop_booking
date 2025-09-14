@@ -245,3 +245,6 @@ class ProfileForm(forms.ModelForm):
         self.fields['location'].widget.attrs.update(
             {'class': "form-control", 'placeholder': 'Location'}
         )
+class LoginForm(forms.Form):
+    # ... existing fields ...
+    remember_me = forms.BooleanField(required=False, widget=forms.CheckboxInput())

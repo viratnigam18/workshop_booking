@@ -1,35 +1,136 @@
 {% extends 'workshop_app/base.html' %}
 
-	{% block title %}
-		Register
-	{% endblock %}
+{% block title %}Coordinator Registration - FOSSEE Workshops{% endblock %}
 
 {% block content %}
+<div class="registration-page">
+  <div class="registration-container">
+    <div class="registration-card">
+      <!-- Logo -->
+      <div class="logo-container">
+        <img src="https://fossee.in/sites/all/themes/software_responsive_theme/img/logo.png" 
+             alt="FOSSEE Logo" 
+             class="fossee-logo">
+      </div>
 
-	<style type="text/css">
-    	label.required::after {
-    	content: "*";
-    	color: red;
-		}
-
-		.errorlist {
-      color: red;
-    }
-	</style>
-
-	<div class="container" >
-		<br>
-		<h3>Coordinator Registration Form</h3>
-		<br>
-		<form action="" method="post">
-			{% csrf_token %}
-				<table class="table table-bordered">
-					{{ form.as_table }}
-				</table>
-
-				<button class="btn btn-primary" type="submit">Register</button>
-		</form><br>
-		<!-- Activate when Instructor registeration starts -->
-		<br>
-	</div>
+      <!-- Registration Form -->
+      <form method="post" class="registration-form">
+        {% csrf_token %}
+        
+        {% if form.errors %}
+          <div class="alert alert-error">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path fill-rule="evenodd" d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm0-12a1 1 0 0 0-1 1v4a1 1 0 1 0 2 0V5a1 1 0 0 0-1-1zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+            </svg>
+            Please correct the errors below.
+          </div>
+        {% endif %}
+        
+        <!-- Personal Information -->
+        <fieldset class="form-section">
+          <legend class="section-title">Personal Information</legend>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="id_username" class="form-label">Username*</label>
+              {{ form.username }}
+              <small class="form-text">Letters, digits, period and underscore only.</small>
+            </div>
+            
+            <div class="form-group">
+              <label for="id_email" class="form-label">Email*</label>
+              {{ form.email }}
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="id_password1" class="form-label">Password*</label>
+              {{ form.password1 }}
+              <small class="form-text">{{ form.password1.help_text }}</small>
+            </div>
+            
+            <div class="form-group">
+              <label for="id_password2" class="form-label">Confirm Password*</label>
+              {{ form.password2 }}
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="id_title" class="form-label">Title*</label>
+              {{ form.title }}
+            </div>
+            
+            <div class="form-group">
+              <label for="id_first_name" class="form-label">First Name*</label>
+              {{ form.first_name }}
+            </div>
+            
+            <div class="form-group">
+              <label for="id_last_name" class="form-label">Last Name*</label>
+              {{ form.last_name }}
+            </div>
+          </div>
+        </fieldset>
+        
+        <!-- Contact Information -->
+        <fieldset class="form-section">
+          <legend class="section-title">Contact Information</legend>
+          
+          <div class="form-group">
+            <label for="id_phone_number" class="form-label">Phone Number*</label>
+            {{ form.phone_number }}
+          </div>
+        </fieldset>
+        
+        <!-- Institution Information -->
+        <fieldset class="form-section">
+          <legend class="section-title">Institution Information</legend>
+          
+          <div class="form-group">
+            <label for="id_institute" class="form-label">Institute*</label>
+            {{ form.institute }}
+            <small class="form-text">Please write full name of your Institute/Organization</small>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="id_department" class="form-label">Department*</label>
+              {{ form.department }}
+              <small class="form-text">Department you work/study</small>
+            </div>
+            
+            <div class="form-group">
+              <label for="id_location" class="form-label">Location*</label>
+              {{ form.location }}
+              <small class="form-text">Place/City</small>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="id_state" class="form-label">State*</label>
+            {{ form.state }}
+          </div>
+        </fieldset>
+        
+        <!-- Additional Information -->
+        <fieldset class="form-section">
+          <legend class="section-title">Additional Information</legend>
+          
+          <div class="form-group">
+            <label for="id_how_did_you_hear_about_us" class="form-label">How did you hear about us?*</label>
+            {{ form.how_did_you_hear_about_us }}
+          </div>
+        </fieldset>
+        
+        <button type="submit" class="btn-primary">Register</button>
+      </form>
+      
+      <div class="login-link">
+        <p>Already have an account? <a href="{% url 'workshop_app:login' %}" class="text-link">Sign in</a></p>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
